@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>fontfinder.js</title>
+    <script type="text/javascript" src="fontfinder.js"></script>
+</head>
+<body>
+    <ul id="list">
+    </ul>
+    <script type="text/javascript">
+        (function () {
+            var options = {
+                presetFontList: [
+                    'ヒラギノ角ゴ Pro',
+                    'ＭＳ ゴシック',
+                    'ＭＳ Ｐゴシック',
+                    'ＭＳ 明朝',
+                    'ＭＳ Ｐ明朝',
+                    'メイリオ',
+                    'Arial',
+                    'Times New Roman'
+                ]
+            };
+            var fontFinder = new FontFinder(options);
+
+            // フォントの一覧を取得する
+            var fontList = fontFinder.getFontList();
+
+            // presetFontListで指定しなかったフォントを確認する
+            var font = 'Some Font';
+            if (fontList.indexOf(font) == -1 && fontFinder.hasFont(font)) {
+                fontList.push(font);
+            };
+
+            // フォントの一覧を表示する
+            var ul = document.getElementById('list');
+            for (var i in fontList) {
+                var li = document.createElement('li');
+                li.innerText = fontList[i];
+                ul.appendChild(li);
+            }
+        })();
+    </script>
+</body>
+</html>
